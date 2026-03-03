@@ -1,19 +1,23 @@
 package backend.application.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
 
 @Getter
 @Setter
-@Entity(name = "users_table")
+@Entity(name = "users")
 public class UserModel {
     @Column(nullable = false)
     @Id
@@ -24,4 +28,8 @@ public class UserModel {
     private String email;
     @Column(nullable = false)
     private String password;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<TaskModel> tasks = new ArrayList<>() {
+        
+    };
 }

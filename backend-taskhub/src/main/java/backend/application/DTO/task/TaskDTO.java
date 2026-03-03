@@ -1,5 +1,7 @@
 package backend.application.DTO.task;
 
-public record TaskDTO(String title, String description, boolean completed) {
+import java.util.UUID;
+
+public record TaskDTO(String title, String description, boolean completed, UUID userId) {
     
 }

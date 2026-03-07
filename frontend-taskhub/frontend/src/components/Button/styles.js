@@ -19,4 +19,8 @@ export const ButtonContainer = styled.button`
         opacity: 0.6;
         cursor:pointer;
     }
+
+    @media (max-width: 768px) {
+        padding: 15px 0;
+    }
 `;

@@ -10,7 +10,6 @@ import { Input } from "../../components/Input";
 import { AuthLayout } from "../../components/AuthLayout";
 
 import { api } from "../../services/api";
-import { FaUser } from "react-icons/fa";
 
 const schema = yup
     .object({
@@ -37,6 +36,8 @@ const Login = () => {
             });
             if (response.data) {
                 alert("Login realizado com sucesso!");
+                localStorage.setItem('userId', response.data.id);
+                navigate("/dashboard");
             } else {
                 alert("E-mail ou senha incorretos.");
             }

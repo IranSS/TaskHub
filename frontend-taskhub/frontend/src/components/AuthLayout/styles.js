@@ -1,12 +1,22 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 100%; 
+    width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f4f4f9;
+`;
+
+export const LoginContainer = styled.div`
+    width: 100%;
+    max-width: 350px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
 
     form {
         width: 100%;
@@ -14,17 +24,16 @@ export const Container = styled.div`
         flex-direction: column;
         gap: 8px;
     }
-`;
 
-export const LoginContainer = styled.div`
-    width: 90%;
-    max-width: 350px;
-    background-color: #FFFFFF;
-    border-radius: 12px;
-    padding: 40px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
+    a {
+        text-decoration: none;
+        font-weight: bolder;
+        color: black;
+    }
+
+    @media (max-width: 768px) {
+        width: 80%;
+    }
 `;
 
 export const Column = styled.div`
@@ -39,4 +48,9 @@ export const Title = styled.h1`
     color: #333;
     margin-bottom: 24px;
     text-align: center;
+
+    @media (max-width: 768px) {
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
 `;

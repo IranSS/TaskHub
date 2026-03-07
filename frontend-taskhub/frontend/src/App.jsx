@@ -6,6 +6,8 @@ import {
 
 import { Login } from "./pages/login";
 import { SignUp } from "./pages/signup";
+import { Dashboard } from "./pages/dashboard";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const App = () => {
 
@@ -14,6 +16,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
       </Routes>
     </Router>
   );

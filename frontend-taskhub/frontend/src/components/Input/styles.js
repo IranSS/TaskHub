@@ -21,6 +21,10 @@ export const InputContainer = styled.div`
     &:focus-within {
         background-color: rgba(0, 0, 0, 0.2);
     }
+
+    @media (max-width: 768px) {
+        padding: 15px 0;
+    }
 `;
 
 export const IconContainer = styled.div`

@@ -1,10 +1,12 @@
 package backend.application.controllers;
 
+import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,15 +15,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import backend.application.DTO.task.TaskDTO;
 import backend.application.models.TaskModel;
+import backend.application.models.UserModel;
 import backend.application.repositories.TaskRepository;
+import backend.application.repositories.UserRepository;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:5173")
+@RestController
 @RequestMapping("/tasks")
 public class TaskController {
 
+    @Autowired
+    UserRepository userRepository;
     TaskRepository taskRepository;
 
     public TaskController(TaskRepository taskRepository){
@@ -34,9 +42,14 @@ public class TaskController {
     public ResponseEntity<?> createTask(@RequestBody TaskDTO entity){
         TaskModel task = new TaskModel();
 
+        // procurar usuário pelo id
+        UserModel user = userRepository.findById(entity.userId())
+                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+
         task.setTitle(entity.title());
         task.setDescription(entity.description());
         task.setCompleted(entity.completed());
+        task.setUser(user);
 
         taskRepository.save(task);
         return ResponseEntity.status(HttpStatus.CREATED).body("Tarefa criada com sucesso!");
@@ -48,8 +61,13 @@ public class TaskController {
     }
     
     @GetMapping("/getAll")
-    public ResponseEntity<?> getAllTasks(){
-        return ResponseEntity.status(HttpStatus.FOUND).body(taskRepository.findAll());
+    public List<TaskDTO> getAllTasks(){
+        return taskRepository.findAll().stream().map(task -> new TaskDTO(
+            task.getTitle(),
+            task.getDescription(),
+            task.isCompleted(),
+            task.getUser().getId()
+        )).toList();
     }
 
     @PutMapping("/update/{id}")

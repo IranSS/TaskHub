@@ -36,7 +36,7 @@ const SignUp = () => {
         try {
             await api.post("/users/create", data);
             alert("Conta criada com sucesso!");
-            navigate("/login");
+            navigate("/");
         } catch (error) {
             console.error("Erro ao criar conta:", error);
             alert("Erro ao criar conta. Por favor, tente novamente.");

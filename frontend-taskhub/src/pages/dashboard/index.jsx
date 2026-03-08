@@ -1,12 +1,19 @@
 import { Header } from "../../components/Header";
 import { TaskItem } from "../../components/TaskItem";
-import { Container, TasksContainer } from "./styles";
+import { Container, Row, TasksContainer } from "./styles";
 
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState("all");
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "completed") return task.completed;
+    if (filter === "pending") return !task.completed;
+    return true;
+  });
+
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
@@ -38,9 +45,23 @@ const Dashboard = () => {
     <>
       <Header />
       <Container>
-        <h3>Dashboard</h3>
+        <Row>
+          <h2>Minhas Tarefas</h2>
+          <div>
+            <label htmlFor="filter">Filtrar: </label>
+            <select
+              id="filter"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <option value="all">Todas</option>
+              <option value="completed">Concluídas</option>
+              <option value="pending">Pendentes</option>
+            </select>
+          </div>
+        </Row>
         <TasksContainer>
-          {tasks.map((task) => (
+          {filteredTasks.map((task) => (
             <TaskItem
               key={task.id}
               task={task}

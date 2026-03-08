@@ -59,10 +59,22 @@ public class TaskController {
     public ResponseEntity<?> getTaskId(@RequestParam UUID id) {
         return ResponseEntity.status(HttpStatus.FOUND).body(taskRepository.findById(id));
     }
+
+    @GetMapping("/getByUser")
+    public List<TaskDTO> getTasksByUser(@RequestParam UUID userId) {
+        return taskRepository.findByUserId(userId).stream().map(task -> new TaskDTO(
+            task.getId(),
+            task.getTitle(),
+            task.getDescription(),
+            task.isCompleted(),
+            task.getUser().getId()
+        )).toList();
+    }
     
     @GetMapping("/getAll")
     public List<TaskDTO> getAllTasks(){
         return taskRepository.findAll().stream().map(task -> new TaskDTO(
+            task.getId(),
             task.getTitle(),
             task.getDescription(),
             task.isCompleted(),

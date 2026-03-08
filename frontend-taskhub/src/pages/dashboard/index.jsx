@@ -19,7 +19,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await api.get(`/tasks/getAll`);
+        const response = await api.get(`/tasks/getByUser?userId=${userId}`);
         setTasks(response.data);
         console.log("Tarefas:", response.data);
       } catch (error) {
@@ -31,6 +31,10 @@ const Dashboard = () => {
   }, []);
 
   const onDelete = async (taskId) => {
+    const confirmDelete = window.confirm(
+      "Tem certeza que deseja excluir esta tarefa?",
+    );
+    if (!confirmDelete) return;
     try {
       await api.delete(`/tasks/delete/${taskId}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
@@ -39,7 +43,21 @@ const Dashboard = () => {
     }
   };
 
-  const onEdit = () => {};
+  const onEdit = async (task) => {
+    const confirmEdit = window.confirm(
+      "Tem certeza que deseja alterar o status desta tarefa?",
+    );
+    if (!confirmEdit) return;
+    try {
+      const updatedTask = { ...task, completed: !task.completed };
+      await api.put(`/tasks/update/${task.id}`, updatedTask);
+      setTasks((prevTasks) =>
+        prevTasks.map((t) => (t.id === task.id ? updatedTask : t)),
+      );
+    } catch (error) {
+      console.error("Erro ao atualizar tarefa:", error);
+    }
+  };
 
   return (
     <>
@@ -47,18 +65,15 @@ const Dashboard = () => {
       <Container>
         <Row>
           <h2>Minhas Tarefas</h2>
-          <div>
-            <label htmlFor="filter">Filtrar: </label>
-            <select
-              id="filter"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            >
-              <option value="all">Todas</option>
-              <option value="completed">Concluídas</option>
-              <option value="pending">Pendentes</option>
-            </select>
-          </div>
+          <select
+            id="filter"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <option value="all">Todas</option>
+            <option value="completed">Concluídas</option>
+            <option value="pending">Pendentes</option>
+          </select>
         </Row>
         <TasksContainer>
           {filteredTasks.map((task) => (

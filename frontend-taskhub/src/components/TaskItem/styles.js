@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const ControlButtons = styled.div`
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
   margin-top: 1rem;
   position: absolute;
   right: 1rem;

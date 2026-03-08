@@ -6,9 +6,16 @@ export const Container = styled.div`
 
 export const Row = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 1rem;
+  gap: 1rem;
+
+  select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
 `;
 
 export const TasksContainer = styled.div`

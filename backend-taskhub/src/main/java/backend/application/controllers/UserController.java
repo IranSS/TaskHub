@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.application.DTO.UserDTOCadaster;
-import backend.application.models.UserModel;
+import backend.application.models.user.UserModel;
+import backend.application.models.user.UserRole;
 import backend.application.repositories.UserRepository;
 
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -30,33 +29,45 @@ public class UserController {
     }
 
     // CRUD completo de usuários
+    // operação para criar um novo usuário
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody UserDTOCadaster entity) {
         UserModel user = new UserModel();
         user.setEmail(entity.email());
         user.setName(entity.name());
         user.setPassword(entity.password());
+        
+        // Se o usuário não informar seu nível de acesso, ele vai ser criado como um usuário padrão
+        // Atualmente só existe 2 tipos USER(o padrão) e ADMIN(consegue acessar todos os endpoints)
+        if (entity.role() == null) {
+            user.setRole(UserRole.USER);
+        } else {
+            user.setRole(entity.role());
+        }
 
         userRepository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com sucesso!");
     }
 
+    // operação para obter um usuário pelo email
     @GetMapping("/getOne")
     public ResponseEntity<?> getOneUser(@RequestParam String email) {
         return ResponseEntity.status(HttpStatus.OK).body(userRepository.findByEmail(email));
     }
 
+    // operação para obter todos os usuários
     @GetMapping("/getAll")
     public ResponseEntity<?> getAllUsers() {
         return ResponseEntity.status(HttpStatus.OK).body(userRepository.findAll());
     }
 
+    // atulizar um usuário pelo id
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateUser(@PathVariable UUID id, @RequestBody UserDTOCadaster entity) {
 
+        // procura o usuário pelo id, se não encontrar, lança uma execeção
         UserModel user = userRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
-
         user.setEmail(entity.email());
         user.setName(entity.name());
         user.setPassword(entity.password());
@@ -64,11 +75,15 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body("Usuário atualizado com sucesso!");
     }
+
+    // Deletar usuário pelo id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable UUID id) {
+        // Verifica se o usuário existe
         if(!userRepository.existsById(id)) {
             throw new RuntimeException("Usuário não encontrado!");
         }
+        // Deletar o usuário se encontrar ele
         userRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Usuário deletado com sucesso!");
     }

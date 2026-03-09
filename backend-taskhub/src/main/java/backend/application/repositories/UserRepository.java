@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import backend.application.models.UserModel;
+import backend.application.models.user.UserModel;
 
 
 @Repository

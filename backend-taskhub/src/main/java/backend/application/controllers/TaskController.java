@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import backend.application.DTO.task.TaskDTO;
 import backend.application.models.TaskModel;
-import backend.application.models.UserModel;
+import backend.application.models.user.UserModel;
 import backend.application.repositories.TaskRepository;
 import backend.application.repositories.UserRepository;
 
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
@@ -37,7 +35,7 @@ public class TaskController {
     }
 
     // operações de CRUD para tarefas
-
+    // operação para criar uma nova tarefa
     @PostMapping("/create")
     public ResponseEntity<?> createTask(@RequestBody TaskDTO entity){
         TaskModel task = new TaskModel();
@@ -55,11 +53,13 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Tarefa criada com sucesso!");
     }
 
+    // operação para obter uma tarefa pelo id
     @GetMapping("/getOne")
     public ResponseEntity<?> getTaskId(@RequestParam UUID id) {
         return ResponseEntity.status(HttpStatus.FOUND).body(taskRepository.findById(id));
     }
 
+    // Pegar todas as tarefas de um usuário especifico
     @GetMapping("/getByUser")
     public List<TaskDTO> getTasksByUser(@RequestParam UUID userId) {
         return taskRepository.findByUserId(userId).stream().map(task -> new TaskDTO(
@@ -71,6 +71,7 @@ public class TaskController {
         )).toList();
     }
     
+    // pegar todas as tarefas
     @GetMapping("/getAll")
     public List<TaskDTO> getAllTasks(){
         return taskRepository.findAll().stream().map(task -> new TaskDTO(
@@ -82,6 +83,7 @@ public class TaskController {
         )).toList();
     }
 
+    // operação para atualizar uma tarefa existente
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateTask(@PathVariable UUID id, @RequestBody TaskDTO entity) {
         TaskModel task = taskRepository.findById(id)
@@ -95,8 +97,10 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body("Tarefa atualizada com sucesso!");
     }
 
+    // Deletar uma tarefa pelo id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable UUID id) {
+        //tarefa precisa existir para ser apagada
         if(!taskRepository.existsById(id)) {
             throw new RuntimeException("Tarefa não encontrada!");
         }

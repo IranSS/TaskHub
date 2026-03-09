@@ -10,6 +10,6 @@ import backend.application.models.TaskModel;
 
 @Repository
 public interface TaskRepository extends JpaRepository<TaskModel, UUID> {
-
+    // Metodo para encontrar tarefas pelo id do usuário
     List<TaskModel> findByUserId(UUID userId);
 }

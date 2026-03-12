@@ -67,7 +67,7 @@ public class TaskController {
             task.getTitle(),
             task.getDescription(),
             task.isCompleted(),
-            task.getUser().getId()
+            task.getId()
         )).toList();
     }
     
@@ -79,7 +79,7 @@ public class TaskController {
             task.getTitle(),
             task.getDescription(),
             task.isCompleted(),
-            task.getUser().getId()
+            task.getId()
         )).toList();
     }
 

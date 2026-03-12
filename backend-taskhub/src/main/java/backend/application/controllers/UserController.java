@@ -64,7 +64,6 @@ public class UserController {
     // atulizar um usuário pelo id
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateUser(@PathVariable UUID id, @RequestBody UserDTOCadaster entity) {
-
         // procura o usuário pelo id, se não encontrar, lança uma execeção
         UserModel user = userRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));

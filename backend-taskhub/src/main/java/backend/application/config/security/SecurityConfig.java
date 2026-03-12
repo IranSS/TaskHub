@@ -19,7 +19,7 @@ public class SecurityConfig {
     // Vou confirgurar os Paths com as permissções para cada endpoint ainda, por enquanto, todos os endpoints estão liberados para qualquer usuário acessar
     // sem necessidade de autenticação
     @Bean
-    private SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .cors(cors -> cors.configurationSource(configurationSource()))
             .csrf(csrf -> csrf.disable())
@@ -34,7 +34,7 @@ public class SecurityConfig {
 
     // Configuração de CORS para permitir requisições de qualquer origem e método, e permitir todos os headers
     @Bean
-    private CorsConfigurationSource configurationSource() {
+    public CorsConfigurationSource configurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:5173"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));

@@ -12,6 +12,8 @@ import { AuthLayout } from "../../components/AuthLayout";
 
 import { api } from "../../services/api";
 
+import { toast } from "react-toastify";
+
 const schema = yup
   .object({
     name: yup
@@ -44,11 +46,11 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     try {
       await api.post("/users/create", data);
-      alert("Conta criada com sucesso!");
+      toast.success("Conta criada com sucesso!");
       navigate("/");
     } catch (error) {
       console.error("Erro ao criar conta:", error);
-      alert("Erro ao criar conta. Por favor, tente novamente.");
+      toast.error("Erro ao criar conta. Por favor, tente novamente.");
     }
   };
 

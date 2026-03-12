@@ -11,6 +11,8 @@ import { AuthLayout } from "../../components/AuthLayout";
 
 import { api } from "../../services/api";
 
+import { toast } from "react-toastify";
+
 const schema = yup
   .object({
     email: yup
@@ -46,11 +48,11 @@ const Login = () => {
         localStorage.setItem("userId", response.data.id);
         navigate("/dashboard");
       } else {
-        alert("E-mail ou senha incorretos.");
+        toast.error("Credenciais inválidas. Por favor, tente novamente.");
       }
     } catch (error) {
       console.error("Erro ao realizar login:", error);
-      alert("Erro ao realizar login. Por favor, tente novamente.");
+      toast.error("Erro ao realizar login. Por favor, tente novamente.");
     }
   };
 

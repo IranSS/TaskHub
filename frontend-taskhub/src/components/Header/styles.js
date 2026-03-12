@@ -7,8 +7,7 @@ export const Container = styled.header`
   padding: 0.75rem 1.5rem;
   border-bottom: 1px solid #ccc;
 
-  .btn-sair {
-    background-color: #e74c3c;
+  button {
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -18,5 +17,18 @@ export const Container = styled.header`
     &:hover {
       opacity: 0.75;
     }
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-sair {
+    background-color: #e74c3c;
+  }
+
+  .btn-nova-tarefa {
+    background-color: black;
   }
 `;

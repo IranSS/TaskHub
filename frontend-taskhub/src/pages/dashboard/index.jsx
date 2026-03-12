@@ -1,9 +1,12 @@
 import { Header } from "../../components/Header";
 import { TaskItem } from "../../components/TaskItem";
+import { TaskEditorModal } from "../../components/TaskEditorModal";
 import { Container, Row, TasksContainer } from "./styles";
 
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
+
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,19 +17,25 @@ const Dashboard = () => {
     return true;
   });
 
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
   const userId = localStorage.getItem("userId");
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await api.get(`/tasks/getByUser?userId=${userId}`);
-        setTasks(response.data);
-        console.log("Tarefas:", response.data);
-      } catch (error) {
-        console.error("Erro ao buscar tarefas:", error);
-      }
-    };
+  const fetchTasks = async () => {
+    try {
+      const response = await api.get(`/tasks/getByUser?userId=${userId}`);
+      setTasks(response.data);
+      console.log("Tarefas:", response.data);
+    } catch (error) {
+      console.error("Erro ao buscar tarefas:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchTasks();
   }, []);
 
@@ -38,8 +47,10 @@ const Dashboard = () => {
     try {
       await api.delete(`/tasks/delete/${taskId}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+      toast.success("Tarefa excluída com sucesso!");
     } catch (error) {
       console.error("Erro ao excluir tarefa:", error);
+      toast.error("Erro ao excluir tarefa.");
     }
   };
 
@@ -54,14 +65,16 @@ const Dashboard = () => {
       setTasks((prevTasks) =>
         prevTasks.map((t) => (t.id === task.id ? updatedTask : t)),
       );
+      toast.success("Tarefa atualizada com sucesso!");
     } catch (error) {
       console.error("Erro ao atualizar tarefa:", error);
+      toast.error("Erro ao atualizar tarefa.");
     }
   };
 
   return (
     <>
-      <Header />
+      <Header onAddTask={toggleModal} />
       <Container>
         <Row>
           <h2>Minhas Tarefas</h2>
@@ -86,6 +99,13 @@ const Dashboard = () => {
           ))}
         </TasksContainer>
       </Container>
+      {showModal && (
+        <TaskEditorModal
+          onClose={toggleModal}
+          onTaskCreated={fetchTasks}
+          userId={userId}
+        />
+      )}
     </>
   );
 };

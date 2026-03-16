@@ -8,6 +8,6 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: "Open Sans", sans-serif;
-    background-color: #f4f4f9;
+    background-color: ${({ theme }) => theme.body};
   }
 `;

@@ -16,10 +16,11 @@ export const InputContainer = styled.div`
   padding: 10px 0;
   border: none;
   border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: ${({ theme }) => theme.inputBg};
 
   &:focus-within {
-    background-color: rgba(0, 0, 0, 0.2);
+    border: ${({ theme }) => `2px solid ${theme.accent}`};
+    width: calc(100% - 4px);
   }
 
   @media (max-width: 768px) {
@@ -29,7 +30,7 @@ export const InputContainer = styled.div`
 
 export const IconContainer = styled.div`
   * {
-    color: black;
+    color: ${({ theme }) => theme.text};
   }
 
   margin-left: 10px;
@@ -43,7 +44,7 @@ export const ErrorText = styled.span`
 
 export const InputText = styled.input`
   background: transparent;
-  color: black;
+  color: ${({ theme }) => theme.text};
   border: none;
   width: 100%;
   font-size: 100%;

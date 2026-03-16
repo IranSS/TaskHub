@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  margin-top: 100px;
   width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,10 +11,10 @@ export const Container = styled.div`
 export const LoginContainer = styled.div`
   width: 100%;
   max-width: 350px;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.background};
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  box-shadow: ${({ theme }) => `4px 4px 8px 4px ${theme.inputBg}`};
   display: flex;
   flex-direction: column;
 
@@ -28,7 +28,11 @@ export const LoginContainer = styled.div`
   a {
     text-decoration: none;
     font-weight: bolder;
-    color: black;
+    color: ${({ theme }) => theme.text};
+  }
+
+  span {
+    color: ${({ theme }) => theme.text};
   }
 
   @media (max-width: 768px) {
@@ -45,7 +49,7 @@ export const Column = styled.div`
 export const Title = styled.h1`
   font-size: 32px;
   font-weight: 700;
-  color: #333;
+  color: ${({ theme }) => theme.text};
   margin-bottom: 24px;
   text-align: center;
 

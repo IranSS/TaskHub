@@ -1,8 +1,8 @@
 import { styled, css } from "styled-components";
 
 export const ButtonContainer = styled.button`
-  background-color: black;
-  color: white;
+  background-color: ${({ theme }) => theme.accent};
+  color: ${({ theme }) => theme.background};
   border: none;
   border-radius: 8px;
   position: relative;

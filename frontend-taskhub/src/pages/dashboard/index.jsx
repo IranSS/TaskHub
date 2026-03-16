@@ -1,7 +1,7 @@
 import { Header } from "../../components/Header";
 import { TaskItem } from "../../components/TaskItem";
 import { TaskEditorModal } from "../../components/TaskEditorModal";
-import { Container, Row, TasksContainer } from "./styles";
+import { Container, Row, TasksContainer, Title } from "./styles";
 
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
@@ -18,6 +18,7 @@ const Dashboard = () => {
   });
 
   const [showModal, setShowModal] = useState(false);
+  const [actualTask, setActualTask] = useState(null);
 
   const toggleModal = () => {
     setShowModal((prev) => !prev);
@@ -55,29 +56,16 @@ const Dashboard = () => {
   };
 
   const onEdit = async (task) => {
-    const confirmEdit = window.confirm(
-      "Tem certeza que deseja alterar o status desta tarefa?",
-    );
-    if (!confirmEdit) return;
-    try {
-      const updatedTask = { ...task, completed: !task.completed };
-      await api.put(`/tasks/update/${task.id}`, updatedTask);
-      setTasks((prevTasks) =>
-        prevTasks.map((t) => (t.id === task.id ? updatedTask : t)),
-      );
-      toast.success("Tarefa atualizada com sucesso!");
-    } catch (error) {
-      console.error("Erro ao atualizar tarefa:", error);
-      toast.error("Erro ao atualizar tarefa.");
-    }
+    setActualTask(task);
+    toggleModal();
   };
 
   return (
     <>
-      <Header onAddTask={toggleModal} />
+      <Header logged={true} onAddTask={toggleModal} />
       <Container>
         <Row>
-          <h2>Minhas Tarefas</h2>
+          <Title>Minhas Tarefas</Title>
           <select
             id="filter"
             value={filter}
@@ -101,6 +89,7 @@ const Dashboard = () => {
       </Container>
       {showModal && (
         <TaskEditorModal
+          taskData={actualTask}
           onClose={toggleModal}
           onTaskCreated={fetchTasks}
           userId={userId}

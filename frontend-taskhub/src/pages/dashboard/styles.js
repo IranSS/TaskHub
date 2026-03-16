@@ -4,6 +4,10 @@ export const Container = styled.div`
   padding: 1rem;
 `;
 
+export const Title = styled.h2`
+  color: ${({ theme }) => theme.text};
+`;
+
 export const Row = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -13,8 +17,14 @@ export const Row = styled.div`
 
   select {
     padding: 0.5rem;
-    border: 1px solid #ccc;
+    color: ${({ theme }) => theme.text};
+    background-color: transparent;
+    border: ${({ theme }) => `1px solid ${theme.accent}`};
     border-radius: 4px;
+
+    option {
+      background-color: ${({ theme }) => theme.background};
+    }
   }
 `;
 

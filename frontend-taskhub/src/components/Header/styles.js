@@ -5,14 +5,15 @@ export const Container = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid #ccc;
+  border-bottom: ${({ theme }) => `1px solid ${theme.accent}`};
+
+  h1 {
+    color: ${({ theme }) => theme.text};
+  }
 
   button {
-    color: white;
-    border: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
-    border-radius: 4px;
 
     &:hover {
       opacity: 0.75;
@@ -26,9 +27,5 @@ export const Container = styled.header`
 
   .btn-sair {
     background-color: #e74c3c;
-  }
-
-  .btn-nova-tarefa {
-    background-color: black;
   }
 `;

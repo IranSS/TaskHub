@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { MdLock, MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 
+import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { AuthLayout } from "../../components/AuthLayout";
@@ -55,40 +56,43 @@ const SignUp = () => {
   };
 
   return (
-    <AuthLayout
-      title="Cadastro"
-      footer={
-        <>
-          Já tem uma conta? <Link to="/">Faça login</Link>
-        </>
-      }
-    >
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          name="name"
-          placeholder="Nome"
-          leftIcon={<FaUser />}
-          control={control}
-          errorMessage={errors?.name?.message}
-        />
-        <Input
-          name="email"
-          placeholder="Email"
-          leftIcon={<MdEmail />}
-          control={control}
-          errorMessage={errors?.email?.message}
-        />
-        <Input
-          name="password"
-          type="password"
-          placeholder="Senha"
-          leftIcon={<MdLock />}
-          control={control}
-          errorMessage={errors?.password?.message}
-        />
-        <Button title="Criar Conta" type="submit" />
-      </form>
-    </AuthLayout>
+    <>
+      <Header logged={false} />
+      <AuthLayout
+        title="Cadastro"
+        footer={
+          <>
+            Já tem uma conta? <Link to="/">Faça login</Link>
+          </>
+        }
+      >
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            name="name"
+            placeholder="Nome"
+            leftIcon={<FaUser />}
+            control={control}
+            errorMessage={errors?.name?.message}
+          />
+          <Input
+            name="email"
+            placeholder="Email"
+            leftIcon={<MdEmail />}
+            control={control}
+            errorMessage={errors?.email?.message}
+          />
+          <Input
+            name="password"
+            type="password"
+            placeholder="Senha"
+            leftIcon={<MdLock />}
+            control={control}
+            errorMessage={errors?.password?.message}
+          />
+          <Button title="Criar Conta" type="submit" />
+        </form>
+      </AuthLayout>
+    </>
   );
 };
 

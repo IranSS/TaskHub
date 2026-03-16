@@ -5,6 +5,7 @@ import * as yup from "yup";
 
 import { MdLock, MdEmail } from "react-icons/md";
 
+import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { AuthLayout } from "../../components/AuthLayout";
@@ -57,33 +58,36 @@ const Login = () => {
   };
 
   return (
-    <AuthLayout
-      title="Login"
-      footer={
-        <>
-          Não tem uma conta? <Link to="/signup">Cadastre-se</Link>
-        </>
-      }
-    >
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          name="email"
-          placeholder="Email"
-          leftIcon={<MdEmail />}
-          control={control}
-          errorMessage={errors?.email?.message}
-        />
-        <Input
-          name="password"
-          type="password"
-          placeholder="Senha"
-          leftIcon={<MdLock />}
-          control={control}
-          errorMessage={errors?.password?.message}
-        />
-        <Button title="Entrar" type="submit" />
-      </form>
-    </AuthLayout>
+    <>
+      <Header logged={false}/>
+      <AuthLayout
+        title="Login"
+        footer={
+          <>
+            Não tem uma conta? <Link to="/signup">Cadastre-se</Link>
+          </>
+        }
+      >
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            name="email"
+            placeholder="Email"
+            leftIcon={<MdEmail />}
+            control={control}
+            errorMessage={errors?.email?.message}
+          />
+          <Input
+            name="password"
+            type="password"
+            placeholder="Senha"
+            leftIcon={<MdLock />}
+            control={control}
+            errorMessage={errors?.password?.message}
+          />
+          <Button title="Entrar" type="submit" />
+        </form>
+      </AuthLayout>
+    </>
   );
 };
 

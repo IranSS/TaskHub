@@ -6,7 +6,9 @@ const TaskItem = memo(({ task, onDelete, onEdit }) => {
   return (
     <Container>
       <h3>{task.title}</h3>
+      <br />
       <p>{task.description}</p>
+      <br />
       <p>
         Status: <strong>{task.completed ? "Concluída" : "Pendente"}</strong>
       </p>

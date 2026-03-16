@@ -2,9 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   padding: 1rem;
-  border: 1px solid #ccc;
+  border: ${({ theme }) => `1px solid ${theme.accent}`};
   border-radius: 8px;
   position: relative;
+
+  h3, p {
+    color: ${({ theme }) => theme.text}
+  }
 `;
 
 export const ControlButtons = styled.div`

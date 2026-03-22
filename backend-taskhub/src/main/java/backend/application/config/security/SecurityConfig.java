@@ -1,7 +1,6 @@
 package backend.application.config.security;
 
-import java.util.List;
-
+import backend.application.config.Token.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import backend.application.config.Token.JwtFilter;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -34,6 +33,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
+                        // libera o POST na /users/create
+                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/users/create").permitAll()
                         .requestMatchers("/users/**").authenticated()
                         .requestMatchers("/tasks/**").authenticated()
                         .anyRequest().authenticated())

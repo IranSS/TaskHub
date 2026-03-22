@@ -14,7 +14,6 @@ export const LoginContainer = styled.div`
   background-color: ${({ theme }) => theme.background};
   border-radius: 12px;
   padding: 20px;
-  box-shadow: ${({ theme }) => `4px 4px 8px 4px ${theme.inputBg}`};
   display: flex;
   flex-direction: column;
 

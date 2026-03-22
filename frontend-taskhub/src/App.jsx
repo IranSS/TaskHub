@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,7 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { Login } from "./pages/login";
 import { SignUp } from "./pages/signup";
 import { Dashboard } from "./pages/dashboard";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+
+const PrivateRoute = ({ children }) => {
+  const token = localStorage.getItem("@TaskHub:token");
+
+  return token ? children : <Navigate to="/" />;
+};
 
 const App = () => {
   return (
@@ -18,9 +23,9 @@ const App = () => {
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoute>
+              <PrivateRoute>
                 <Dashboard />
-              </ProtectedRoute>
+              </PrivateRoute>
             }
           />
         </Routes>

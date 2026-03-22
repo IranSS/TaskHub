@@ -1,10 +1,20 @@
 import { Header } from "../../components/Header";
 import { TaskItem } from "../../components/TaskItem";
 import { TaskEditorModal } from "../../components/TaskEditorModal";
-import { Container, Row, TasksContainer, Title } from "./styles";
+import {
+  Container,
+  Row,
+  TasksContainer,
+  Title,
+  FloatingButton,
+} from "./styles";
+
+import { FaPlus } from "react-icons/fa";
 
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 
@@ -17,22 +27,32 @@ const Dashboard = () => {
     return true;
   });
 
-  const [showModal, setShowModal] = useState(false);
+  const [showingModal, setShowingModal] = useState(false);
   const [actualTask, setActualTask] = useState(null);
 
-  const toggleModal = () => {
-    setShowModal((prev) => !prev);
+  const showModal = () => {
+    setShowingModal(true);
   };
 
-  const userId = localStorage.getItem("userId");
+  const hideModal = () => {
+    setShowingModal(false);
+    setActualTask(null);
+  };
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("@TaskHub:token");
+    navigate("/");
+  };
 
   const fetchTasks = async () => {
     try {
-      const response = await api.get(`/tasks/getByUser?userId=${userId}`);
+      const response = await api.get("/tasks/getByUser");
       setTasks(response.data);
-      console.log("Tarefas:", response.data);
     } catch (error) {
       console.error("Erro ao buscar tarefas:", error);
+      toast.error("Não foi possível carregar suas tarefas.");
     }
   };
 
@@ -57,16 +77,17 @@ const Dashboard = () => {
 
   const onEdit = async (task) => {
     setActualTask(task);
-    toggleModal();
+    showModal();
   };
 
   return (
     <>
-      <Header logged={true} onAddTask={toggleModal} />
+      <Header logged={true} onAddTask={showModal} onLogout={handleLogout} />
       <Container>
         <Row>
           <Title>Minhas Tarefas</Title>
           <select
+          className="glassy"
             id="filter"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
@@ -87,14 +108,16 @@ const Dashboard = () => {
           ))}
         </TasksContainer>
       </Container>
-      {showModal && (
+      {showingModal && (
         <TaskEditorModal
           taskData={actualTask}
-          onClose={toggleModal}
+          onClose={hideModal}
           onTaskCreated={fetchTasks}
-          userId={userId}
         />
       )}
+      <FloatingButton className="glassy-border" onClick={showModal}>
+        <FaPlus />
+      </FloatingButton>
     </>
   );
 };

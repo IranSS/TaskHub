@@ -1,28 +1,59 @@
-import { Container } from "./styles";
+import { useRef, useState, useEffect } from "react";
+
+import {
+  Container,
+  UserPicture,
+  UserContainer,
+  ProfileTrigger,
+  DropdownMenu,
+  MenuItem,
+} from "./styles";
+
+import { FaPlus } from "react-icons/fa";
 
 import { ThemeToggler } from "../ThemeToggler";
-
 import { Button } from "../Button";
 
-const Header = ({ logged, onAddTask }) => {
+const Header = ({ logged, onAddTask, onLogout }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <Container>
+    <Container className="glassy">
       <h1>TaskHub</h1>
       <div className="actions">
-        {logged ? <Button title="Nova tarefa" onClick={onAddTask} /> : null}
+        {logged && (
+          <Button
+            className="no-mobile glassy-border"
+            icon={<FaPlus size={16} />}
+            title="Nova Tarefa"
+            onClick={onAddTask}
+          />
+        )}
 
         <ThemeToggler />
 
-        {logged ? (
-          <Button
-            title="Sair"
-            className="btn-sair"
-            onClick={() => {
-              localStorage.removeItem("userId");
-              window.location.href = "/";
-            }}
-          />
-        ) : null}
+        {logged && (
+          <UserContainer ref={menuRef}>
+            <ProfileTrigger onClick={() => setIsOpen(!isOpen)} $opened={isOpen}>
+              <UserPicture src="https://ui-avatars.com/api/?name=TH&rounded=true" />
+            </ProfileTrigger>
+
+            <DropdownMenu className="glassy-border" $opened={isOpen}>
+              <MenuItem onClick={onLogout}>Sair</MenuItem>
+            </DropdownMenu>
+          </UserContainer>
+        )}
       </div>
     </Container>
   );

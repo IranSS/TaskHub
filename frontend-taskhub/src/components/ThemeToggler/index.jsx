@@ -2,21 +2,24 @@ import { useContext } from "react";
 
 import { ThemeContext } from "../../themes/ThemeContext";
 
-import { Button } from "./styles";
-
-import { FaSun, FaMoon } from "react-icons/fa";
+import { LuSun, LuMoon } from "react-icons/lu";
 
 const ThemeToggler = () => {
   const { themeName, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <Button onClick={toggleTheme} title="Alternar tema">
+    <button
+      style={{ borderRadius: "8px" }}
+      className="glassy"
+      onClick={toggleTheme}
+      title="Alternar tema"
+    >
       {themeName == "light" ? (
-        <FaMoon size={20} color="#363537" />
+        <LuSun color="black" size={20} />
       ) : (
-        <FaSun size={20} color="#f1c40f" />
+        <LuMoon color="white" size={20} />
       )}
-    </Button>
+    </button>
   );
 };
 

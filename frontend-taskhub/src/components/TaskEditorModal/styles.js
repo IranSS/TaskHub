@@ -14,7 +14,6 @@ export const ModalOverlay = styled.div`
 
 export const ModalBox = styled.div`
   background-color: ${({ theme }) => theme.background};
-  border: none;
   padding: 20px;
   border-radius: 8px;
   width: 400px;

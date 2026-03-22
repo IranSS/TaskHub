@@ -36,30 +36,36 @@ const Login = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: { email: "", password: "" },
     mode: "onSubmit",
   });
 
-  const onSubmit = async (data) => {
+  const handleLogin = async (data) => {
     try {
-      const response = await api.get(
-        `/users/getOne?email=${data.email}&password=${data.password}`,
-        {},
-      );
-      if (response.data) {
-        localStorage.setItem("userId", response.data.id);
+      const response = await api.post("/auth/login", {
+        email: data.email,
+        password: data.password,
+      });
+
+      const rawResponse = response.data;
+      const token = rawResponse.split(": ")[1];
+
+      if (token) {
+        localStorage.setItem("@TaskHub:token", token);
+        localStorage.setItem("@TaskHub:userEmail", data.email);
+
+        toast.success("Login realizado com sucesso!");
         navigate("/dashboard");
-      } else {
-        toast.error("Credenciais inválidas. Por favor, tente novamente.");
       }
-    } catch (error) {
-      console.error("Erro ao realizar login:", error);
-      toast.error("Erro ao realizar login. Por favor, tente novamente.");
+    } catch (err) {
+      console.error(err);
+      toast.error("Erro ao logar: Verifique suas credenciais.");
     }
   };
 
   return (
     <>
-      <Header logged={false}/>
+      <Header logged={false} />
       <AuthLayout
         title="Login"
         footer={
@@ -68,7 +74,7 @@ const Login = () => {
           </>
         }
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(handleLogin)}>
           <Input
             name="email"
             placeholder="Email"

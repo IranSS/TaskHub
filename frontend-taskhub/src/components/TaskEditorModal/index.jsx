@@ -29,7 +29,7 @@ const schema = yup
   })
   .required();
 
-const TaskEditorModal = ({ onClose, onTaskCreated, userId, taskData }) => {
+const TaskEditorModal = ({ onClose, onTaskCreated, taskData }) => {
   const isEditing = !!taskData;
 
   const {
@@ -50,29 +50,21 @@ const TaskEditorModal = ({ onClose, onTaskCreated, userId, taskData }) => {
   const handleCreateTask = async (data) => {
     try {
       if (isEditing) {
-        await api.put(`/tasks/update/${taskData.id}`, {
-          ...data,
-          userId,
-        });
-        toast.success("Tarefa atualizada com sucesso!");
+        await api.put(`/tasks/update/${taskData.id}`, data);
       } else {
-        await api.post("/tasks/create", {
-          ...data,
-          userId,
-        });
-        toast.success("Tarefa criada com sucesso!");
+        await api.post("/tasks/create", data);
       }
+      toast.success("Tarefa criada com sucesso!");
       onClose();
       onTaskCreated();
     } catch (error) {
-      console.error("Erro ao criar tarefa:", error);
-      toast.error("Erro ao criar tarefa.");
+      toast.error("Erro na comunicação com o servidor.");
     }
   };
 
   return (
     <ModalOverlay onClick={onClose}>
-      <ModalBox onClick={(e) => e.stopPropagation()}>
+      <ModalBox className="glassy-border" onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={onClose}>
           <IoMdClose />
         </CloseButton>
@@ -89,6 +81,7 @@ const TaskEditorModal = ({ onClose, onTaskCreated, userId, taskData }) => {
             control={control}
             name="description"
             placeholder="Descrição"
+            multiline
             errorMessage={errors?.description?.message}
           />
 

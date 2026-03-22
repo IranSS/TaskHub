@@ -14,13 +14,11 @@ export const InputContainer = styled.div`
   align-items: center;
   width: 100%;
   padding: 10px 0;
-  border: none;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.inputBg};
 
   &:focus-within {
     border: ${({ theme }) => `2px solid ${theme.accent}`};
-    width: calc(100% - 4px);
   }
 
   @media (max-width: 768px) {
@@ -38,15 +36,18 @@ export const IconContainer = styled.div`
 `;
 
 export const ErrorText = styled.span`
-  color: red;
+  color: ${({ theme }) => theme.red};
   font-size: 12px;
 `;
 
 export const InputText = styled.input`
+  padding: 0 10px;
   background: transparent;
   color: ${({ theme }) => theme.text};
   border: none;
   width: 100%;
   font-size: 100%;
   outline: 0;
+  font-family: inherit;
+  resize: vertical;
 `;

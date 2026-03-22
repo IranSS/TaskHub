@@ -42,11 +42,12 @@ const SignUp = () => {
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onSubmit",
+    defaultValues: { name: "", email: "", password: "" },
   });
 
   const onSubmit = async (data) => {
     try {
-      await api.post("/users/create", data);
+      await api.post("/users/create", { ...data, role: "USER" });
       toast.success("Conta criada com sucesso!");
       navigate("/");
     } catch (error) {

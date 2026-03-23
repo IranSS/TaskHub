@@ -2,6 +2,7 @@ package backend.application.models;
 
 import java.util.UUID;
 
+import backend.application.models.user.UserModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +12,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
-
 
 @Getter
 @Setter

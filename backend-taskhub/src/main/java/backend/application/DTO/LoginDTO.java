@@ -2,8 +2,4 @@ package backend.application.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record UserDTO(
-    @NotBlank
-    String email) {
-    
-}
+public record LoginDTO(@NotBlank String email, @NotBlank String password) {}

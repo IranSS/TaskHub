@@ -1,8 +1,9 @@
 import { ButtonContainer } from "./styles";
 
-const Button = ({ title, icon, onClick, ...rest }) => {
+const Button = ({ title, icon, onClick, secondary, ...rest }) => {
   return icon ? (
     <ButtonContainer
+      $secondary={secondary}
       className="glassy-border"
       $justify="space-between"
       onClick={onClick}
@@ -13,6 +14,7 @@ const Button = ({ title, icon, onClick, ...rest }) => {
     </ButtonContainer>
   ) : (
     <ButtonContainer
+      $secondary={secondary}
       className="glassy-border"
       $justify="center"
       onClick={onClick}

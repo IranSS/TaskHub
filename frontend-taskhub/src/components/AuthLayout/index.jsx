@@ -7,11 +7,6 @@ export const AuthLayout = ({ title, children, footer }) => {
         <Column>
           <Title>{title}</Title>
           {children}
-          {footer && (
-            <span style={{ marginTop: "16px", alignSelf: "center" }}>
-              {footer}
-            </span>
-          )}
         </Column>
       </LoginContainer>
     </Container>

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,6 +9,8 @@ import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { AuthLayout } from "../../components/AuthLayout";
+
+import { MainContainer } from "../../styles/global";
 
 import { api } from "../../services/api";
 
@@ -64,16 +66,9 @@ const Login = () => {
   };
 
   return (
-    <>
+    <MainContainer>
       <Header logged={false} />
-      <AuthLayout
-        title="Login"
-        footer={
-          <>
-            Não tem uma conta? <Link to="/signup">Cadastre-se</Link>
-          </>
-        }
-      >
+      <AuthLayout title="Login">
         <form onSubmit={handleSubmit(handleLogin)}>
           <Input
             name="email"
@@ -93,7 +88,7 @@ const Login = () => {
           <Button title="Entrar" type="submit" />
         </form>
       </AuthLayout>
-    </>
+    </MainContainer>
   );
 };
 

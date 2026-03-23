@@ -9,8 +9,11 @@ export const ButtonContainer = styled.button`
   position: relative;
   padding: 10px 0;
 
-  background-color: ${({ theme }) => theme.accent};
-  color: ${({ theme }) => theme.btnText};
+  background-color: ${({ $secondary, theme }) =>
+    $secondary ? "transparent" : theme.accent};
+  color: ${({ $secondary, theme }) =>
+    $secondary ? theme.accent : theme.btnText};
+
   border-radius: 8px;
   font-size: 14px;
   font-weight: bold;

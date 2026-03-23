@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 
+import { useNavigate, useLocation } from "react-router-dom";
+
 import {
   Container,
   UserPicture,
@@ -18,6 +20,10 @@ const Header = ({ logged, onAddTask, onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef();
 
+  const navigate = useNavigate();
+
+  const { pathname } = useLocation();
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -30,8 +36,18 @@ const Header = ({ logged, onAddTask, onLogout }) => {
 
   return (
     <Container className="glassy">
-      <h1>TaskHub</h1>
+      <h1 onClick={() => navigate("/")}>TaskHub</h1>
       <div className="actions">
+        {pathname === "/login" && (
+          <Button
+            className="glassy-border"
+            title="Criar Conta"
+            onClick={() => navigate("/signup")}
+          />
+        )}
+        {(pathname === "/signup") | (pathname === "/") ? (
+          <Button secondary title="Entrar" onClick={() => navigate("/login")} />
+        ) : null}
         {logged && (
           <Button
             className="no-mobile glassy-border"

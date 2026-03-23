@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, styled } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -38,4 +38,11 @@ export const GlobalStyle = createGlobalStyle`
       display: none;
     }
   }
+`;
+
+export const MainContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;

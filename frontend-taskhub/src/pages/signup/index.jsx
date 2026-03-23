@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -10,6 +10,8 @@ import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { AuthLayout } from "../../components/AuthLayout";
+
+import { MainContainer } from "../../styles/global";
 
 import { api } from "../../services/api";
 
@@ -57,16 +59,9 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <MainContainer>
       <Header logged={false} />
-      <AuthLayout
-        title="Cadastro"
-        footer={
-          <>
-            Já tem uma conta? <Link to="/">Faça login</Link>
-          </>
-        }
-      >
+      <AuthLayout title="Cadastro">
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             name="name"
@@ -93,7 +88,7 @@ const SignUp = () => {
           <Button title="Criar Conta" type="submit" />
         </form>
       </AuthLayout>
-    </>
+    </MainContainer>
   );
 };
 

@@ -1,5 +1,9 @@
 package backend.application.DTO;
 
-public record UserDTO(String email) {
+import jakarta.validation.constraints.NotBlank;
+
+public record UserDTO(
+    @NotBlank
+    String email) {
     
 }

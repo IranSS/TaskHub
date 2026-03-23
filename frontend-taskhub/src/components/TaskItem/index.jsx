@@ -1,21 +1,28 @@
 import { memo } from "react";
 import { Container, ControlButtons } from "./styles";
-import { FaTrash, FaPen } from "react-icons/fa";
+import { LuTrash, LuPen } from "react-icons/lu";
 
 const TaskItem = memo(({ task, onDelete, onEdit }) => {
   return (
-    <Container>
+    <Container className="glassy">
       <h3>{task.title}</h3>
+      <br />
       <p>{task.description}</p>
+      <br />
       <p>
-        Status: <strong>{task.completed ? "Concluída" : "Pendente"}</strong>
+        Status:
+        {task.completed ? (
+          <strong className="green"> Concluída</strong>
+        ) : (
+          <strong className="yellow"> Pendente</strong>
+        )}
       </p>
       <ControlButtons>
-        <button className="editar" onClick={() => onEdit(task)}>
-          <FaPen />
+        <button className="glassy" onClick={() => onEdit(task)}>
+          <LuPen />
         </button>
-        <button className="excluir" onClick={() => onDelete(task.id)}>
-          <FaTrash />
+        <button className="glassy deletar" onClick={() => onDelete(task.id)}>
+          <LuTrash />
         </button>
       </ControlButtons>
     </Container>

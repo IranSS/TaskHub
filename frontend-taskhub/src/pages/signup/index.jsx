@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -6,11 +6,16 @@ import * as yup from "yup";
 import { MdLock, MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 
+import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { AuthLayout } from "../../components/AuthLayout";
 
+import { MainContainer } from "../../styles/global";
+
 import { api } from "../../services/api";
+
+import { toast } from "react-toastify";
 
 const schema = yup
   .object({
@@ -39,54 +44,51 @@ const SignUp = () => {
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onSubmit",
+    defaultValues: { name: "", email: "", password: "" },
   });
 
   const onSubmit = async (data) => {
     try {
-      await api.post("/users/create", data);
-      alert("Conta criada com sucesso!");
+      await api.post("/users/create", { ...data, role: "USER" });
+      toast.success("Conta criada com sucesso!");
       navigate("/");
     } catch (error) {
       console.error("Erro ao criar conta:", error);
-      alert("Erro ao criar conta. Por favor, tente novamente.");
+      toast.error("Erro ao criar conta. Por favor, tente novamente.");
     }
   };
 
   return (
-    <AuthLayout
-      title="Cadastro"
-      footer={
-        <>
-          Já tem uma conta? <Link to="/">Faça login</Link>
-        </>
-      }
-    >
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          name="name"
-          placeholder="Nome"
-          leftIcon={<FaUser />}
-          control={control}
-          errorMessage={errors?.name?.message}
-        />
-        <Input
-          name="email"
-          placeholder="Email"
-          leftIcon={<MdEmail />}
-          control={control}
-          errorMessage={errors?.email?.message}
-        />
-        <Input
-          name="password"
-          type="password"
-          placeholder="Senha"
-          leftIcon={<MdLock />}
-          control={control}
-          errorMessage={errors?.password?.message}
-        />
-        <Button title="Criar Conta" type="submit" />
-      </form>
-    </AuthLayout>
+    <MainContainer>
+      <Header logged={false} />
+      <AuthLayout title="Cadastro">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            name="name"
+            placeholder="Nome"
+            leftIcon={<FaUser />}
+            control={control}
+            errorMessage={errors?.name?.message}
+          />
+          <Input
+            name="email"
+            placeholder="Email"
+            leftIcon={<MdEmail />}
+            control={control}
+            errorMessage={errors?.email?.message}
+          />
+          <Input
+            name="password"
+            type="password"
+            placeholder="Senha"
+            leftIcon={<MdLock />}
+            control={control}
+            errorMessage={errors?.password?.message}
+          />
+          <Button title="Criar Conta" type="submit" />
+        </form>
+      </AuthLayout>
+    </MainContainer>
   );
 };
 

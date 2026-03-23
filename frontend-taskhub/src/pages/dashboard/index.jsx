@@ -1,9 +1,22 @@
 import { Header } from "../../components/Header";
 import { TaskItem } from "../../components/TaskItem";
-import { Container, Row, TasksContainer } from "./styles";
+import { TaskEditorModal } from "../../components/TaskEditorModal";
+import {
+  Container,
+  Row,
+  TasksContainer,
+  Title,
+  FloatingButton,
+} from "./styles";
+
+import { FaPlus } from "react-icons/fa";
 
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,51 +27,75 @@ const Dashboard = () => {
     return true;
   });
 
-  const userId = localStorage.getItem("userId");
+  const [showingModal, setShowingModal] = useState(false);
+  const [actualTask, setActualTask] = useState(null);
+
+  const showModal = () => {
+    setShowingModal(true);
+  };
+
+  const hideModal = () => {
+    setShowingModal(false);
+    setActualTask(null);
+  };
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("@TaskHub:token");
+    navigate("/");
+  };
+
+  const fetchTasks = async () => {
+    try {
+      const response = await api.get("/tasks/getByUser");
+      setTasks(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar tarefas:", error);
+      toast.error("Não foi possível carregar suas tarefas.");
+    }
+  };
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await api.get(`/tasks/getAll`);
-        setTasks(response.data);
-        console.log("Tarefas:", response.data);
-      } catch (error) {
-        console.error("Erro ao buscar tarefas:", error);
-      }
-    };
-
     fetchTasks();
   }, []);
 
   const onDelete = async (taskId) => {
+    const confirmDelete = window.confirm(
+      "Tem certeza que deseja excluir esta tarefa?",
+    );
+    if (!confirmDelete) return;
     try {
       await api.delete(`/tasks/delete/${taskId}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+      toast.success("Tarefa excluída com sucesso!");
     } catch (error) {
       console.error("Erro ao excluir tarefa:", error);
+      toast.error("Erro ao excluir tarefa.");
     }
   };
 
-  const onEdit = () => {};
+  const onEdit = async (task) => {
+    setActualTask(task);
+    showModal();
+  };
 
   return (
     <>
-      <Header />
+      <Header logged={true} onAddTask={showModal} onLogout={handleLogout} />
       <Container>
         <Row>
-          <h2>Minhas Tarefas</h2>
-          <div>
-            <label htmlFor="filter">Filtrar: </label>
-            <select
-              id="filter"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            >
-              <option value="all">Todas</option>
-              <option value="completed">Concluídas</option>
-              <option value="pending">Pendentes</option>
-            </select>
-          </div>
+          <Title>Minhas Tarefas</Title>
+          <select
+          className="glassy"
+            id="filter"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <option value="all">Todas</option>
+            <option value="completed">Concluídas</option>
+            <option value="pending">Pendentes</option>
+          </select>
         </Row>
         <TasksContainer>
           {filteredTasks.map((task) => (
@@ -71,6 +108,16 @@ const Dashboard = () => {
           ))}
         </TasksContainer>
       </Container>
+      {showingModal && (
+        <TaskEditorModal
+          taskData={actualTask}
+          onClose={hideModal}
+          onTaskCreated={fetchTasks}
+        />
+      )}
+      <FloatingButton className="glassy-border" onClick={showModal}>
+        <FaPlus />
+      </FloatingButton>
     </>
   );
 };

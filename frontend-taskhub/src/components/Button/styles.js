@@ -1,12 +1,20 @@
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 
 export const ButtonContainer = styled.button`
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: ${({ $justify }) => $justify};
+  align-items: center;
+  gap: 8px;
   position: relative;
   padding: 10px 0;
+
+  background-color: ${({ $secondary, theme }) =>
+    $secondary ? "transparent" : theme.accent};
+  color: ${({ $secondary, theme }) =>
+    $secondary ? theme.accent : theme.btnText};
+
+  border-radius: 8px;
   font-size: 14px;
   font-weight: bold;
   white-space: nowrap;
@@ -14,6 +22,10 @@ export const ButtonContainer = styled.button`
   letter-spacing: 1px;
 
   width: 100%;
+
+  .centered {
+    justify-content: center;
+  }
 
   &:hover {
     opacity: 0.6;

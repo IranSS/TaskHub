@@ -14,12 +14,11 @@ export const InputContainer = styled.div`
   align-items: center;
   width: 100%;
   padding: 10px 0;
-  border: none;
   border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: ${({ theme }) => theme.inputBg};
 
   &:focus-within {
-    background-color: rgba(0, 0, 0, 0.2);
+    border: ${({ theme }) => `2px solid ${theme.accent}`};
   }
 
   @media (max-width: 768px) {
@@ -28,8 +27,8 @@ export const InputContainer = styled.div`
 `;
 
 export const IconContainer = styled.div`
-  * {
-    color: black;
+  svg {
+    color: ${({ theme }) => theme.text};
   }
 
   margin-left: 10px;
@@ -37,15 +36,18 @@ export const IconContainer = styled.div`
 `;
 
 export const ErrorText = styled.span`
-  color: red;
+  color: ${({ theme }) => theme.red};
   font-size: 12px;
 `;
 
 export const InputText = styled.input`
+  padding: 0 10px;
   background: transparent;
-  color: black;
+  color: ${({ theme }) => theme.text};
   border: none;
   width: 100%;
   font-size: 100%;
   outline: 0;
+  font-family: inherit;
+  resize: vertical;
 `;

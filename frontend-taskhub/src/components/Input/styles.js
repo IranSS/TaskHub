@@ -27,7 +27,7 @@ export const InputContainer = styled.div`
 `;
 
 export const IconContainer = styled.div`
-  * {
+  svg {
     color: ${({ theme }) => theme.text};
   }
 

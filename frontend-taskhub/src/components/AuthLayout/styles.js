@@ -30,10 +30,6 @@ export const LoginContainer = styled.div`
     color: ${({ theme }) => theme.text};
   }
 
-  span {
-    color: ${({ theme }) => theme.text};
-  }
-
   @media (max-width: 768px) {
     width: 80%;
   }

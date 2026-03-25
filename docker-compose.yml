@@ -25,8 +25,6 @@ services:
       - "8080:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://aws-1-sa-east-1.pooler.supabase.com:5432/postgres
-      - SPRING_DATASOURCE_USERNAME=postgres.rfhwvffaqmfhgciogcsb
-      - SPRING_DATASOURCE_PASSWORD=taskhub5632
     # depends_on:
     #   db:
     #     condition: service_healthy

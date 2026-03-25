@@ -1,8 +1,8 @@
-<h1 align="center">[TaskHub] </h1>
+<h1 align="center">[TaskHub]</h1>
 
 <p align="center">
-  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/[SEU_USUARIO]/[SEU_REPOSITORIO]?color=blue">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/[SEU_USUARIO]/[SEU_REPOSITORIO]?color=blue">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/IranSS/TaskHub/?color=blue">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/IranSS/TaskHub/?color=blue">
 </p>
 
 ## 📖 Visão Geral
@@ -58,6 +58,10 @@ Para rodar este projeto localmente, você precisará ter instalado em sua máqui
 ## 🚀 Como Executar o Projeto Localmente
 
 **1. Clone o repositório:**
+```bash
+git clone https://github.com/usuario/nome-do-repositorio.git
+cd nome-do-repositorio
+```
 
 
 
@@ -67,10 +71,6 @@ Para rodar este projeto localmente, você precisará ter instalado em sua máqui
 
 
 
-
-#### Copyright © 2026 / [Quem?](https://github.com/IranSS/)
+#### Copyright © 2026 / [TaskHub Team](https://github.com/IranSS/)
 
 A permissão é concedida, gratuitamente, a qualquer pessoa que obtenha uma cópia deste arquivo, sem restrição nos direitos de usar, copiar, modificar e mesclar.
-
-#### Referências
-

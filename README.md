@@ -1,13 +1,10 @@
 <h1 align="center">[TaskHub]</h1>
 
-<p align="center">
-  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/IranSS/TaskHub/?color=blue">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/IranSS/TaskHub/?color=blue">
-</p>
+> Um gerenciador de tarefas minimalista para quem não quer perder tempo com menus complexos.
 
 ## 📖 Visão Geral
 
-> Este projeto foi desenvolvido como Atividade Final da disciplina de **Desenvolvimento de Software em Nuvem** do curso de ADS / IA (EAD - Unifor). O objetivo principal é projetar, implementar e implantar uma aplicação web escalável baseada em nuvem, utilizando arquitetura em camadas, serviços gerenciados, containers e práticas de DevOps.
+Este projeto foi desenvolvido como Atividade Parcial da disciplina de **Desenvolvimento de Software em Nuvem** do curso de Análise e desenvolvimento de sistemas (EAD - Unifor). O objetivo principal é projetar, implementar e implantar uma aplicação web escalável baseada em nuvem, utilizando arquitetura em camadas, serviços gerenciados, containers e práticas de DevOps.
 
 
 ---
@@ -16,13 +13,13 @@
 
 A equipe é composta por [Inserir quantidade] integrantes, distribuídos nos seguintes papéis técnicos:
 
-| Nome do Aluno | Papel Técnico | GitHub |
-| :--- | :--- | :--- |
-| **[Nome do Aluno 1]** | Arquiteto(a) de Software em Nuvem | [@usuario1](https://github.com/usuario1) |
-| **[Nome do Aluno 2]** | Desenvolvedor(a) Back-end | [@usuario2](https://github.com/usuario2) |
-| **[Nome do Aluno 3]** | Desenvolvedor(a) Front-end | [@usuario3](https://github.com/usuario3) |
-| **[Nome do Aluno 4]** | Engenheiro(a) DevOps | [@usuario4](https://github.com/usuario4) |
-| **[Nome do Aluno 5]** | Responsável por Qualidade e Testes | [@usuario5](https://github.com/usuario5) |
+| Nome do Aluno | Papel Técnico |  
+| :--- | :--- | 
+| **[Nome do Aluno 1]** | Arquiteto(a) de Software em Nuvem
+| **[Nome do Aluno 2]** | Desenvolvedor(a) Back-end
+| **[Nome do Aluno 3]** | Desenvolvedor(a) Front-end
+| **[Nome do Aluno 4]** | Engenheiro(a) DevOps 
+| **[Nome do Aluno 5]** | Responsável por Qualidade e Testes 
 
 ---
 
@@ -39,9 +36,9 @@ O projeto foi desenvolvido utilizando uma arquitetura cliente-servidor, separand
 
 ## 🔗 Links Importantes
 
-- 🌐 **Aplicação em Produção (Front-end):** [Clique aqui para acessar o Front-end](https://link-do-seu-deploy.com)
-- ⚙️ **API em Produção (Back-end):** [Clique aqui para acessar a API](https://link-da-sua-api.com)
-- 📚 **Documentação da API (Swagger/OpenAPI):** [Acessar Documentação](https://link-da-sua-api.com/api-docs)
+-  **Link do projeto frontend Vercel:** [Clique aqui](https://task-hub-chi-seven.vercel.app/)
+-  **Link do projeto backend Render:** [Clique aqui](https://taskhub-clam.onrender.com/)
+-  **Link do projeto backend Swagger Render:** [Clique aqui](https://taskhub-clam.onrender.com/swagger-ui/index.html#/)
 
 ---
 

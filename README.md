@@ -4,32 +4,32 @@
 
 ## 📖 Visão Geral
 
-Este projeto foi desenvolvido como Atividade Parcial da disciplina de **Desenvolvimento de Software em Nuvem** do curso de Análise e desenvolvimento de sistemas (EAD - Unifor). O objetivo principal é projetar, implementar e implantar uma aplicação web escalável baseada em nuvem, utilizando arquitetura em camadas, serviços gerenciados, containers e práticas de DevOps.
+Este projeto foi desenvolvido como Atividade Parcial da disciplina de **Desenvolvimento de Software em Nuvem** do curso de Análise e desenvolvimento de sistemas (Unifor - EAD). O objetivo principal é projetar, implementar e implantar uma aplicação web escalável baseada em nuvem, utilizando arquitetura em camadas, serviços gerenciados, containers e práticas de DevOps.
 
 
 ---
 
 ## 👥 A Equipe
 
-A equipe é composta por [Inserir quantidade] integrantes, distribuídos nos seguintes papéis técnicos:
+A equipe é composta por 6 integrantes, distribuídos nos seguintes papéis técnicos:
 
 | Nome do Aluno | Papel Técnico |  
 | :--- | :--- | 
-| **[Nome do Aluno 1]** | Arquiteto(a) de Software em Nuvem
-| **[Nome do Aluno 2]** | Desenvolvedor(a) Back-end
-| **[Nome do Aluno 3]** | Desenvolvedor(a) Front-end
-| **[Nome do Aluno 4]** | Engenheiro(a) DevOps 
-| **[Nome do Aluno 5]** | Responsável por Qualidade e Testes 
-
+| **Dante vasconcelos Diniz<br>Francisco Iranildo de Sousa Avelino** | Arquiteto(a) de Software em Nuvem
+| **Francisco Iranildo de Sousa Avelino** | Desenvolvedor(a) Back-end
+| **Arimateia Barbosa da Silveira** | Desenvolvedor(a) Front-end
+| **Jorgirerison Leite Peixoto** | Engenheiro(a) DevOps 
+| **Keberson Moura Carvalho** | Responsável por Qualidade e Testes 
+| **Danrley Pereira Dantas** | Documentação e Integração 
 ---
 
 ## 🛠️ Arquitetura e Tecnologias
 
 O projeto foi desenvolvido utilizando uma arquitetura cliente-servidor, separando claramente o front-end, o back-end e a persistência de dados.
 
-- **Front-end:** `[React / Vue / Angular]` - Hospedado em `[Netlify / Vercel]`.
-- **Back-end:** API RESTful desenvolvida em `[Linguagem/Framework]` e containerizada com Docker. Hospedada em `[Render / AWS / GCP]`.
-- **Banco de Dados:** `[Firebase / MongoDB Atlas / Supabase]` (Serviço gerenciado em nuvem com persistência fora do container).
+- **Front-end:** `React` - Hospedado em `Vercel`.
+- **Back-end:** API RESTful desenvolvida em `Java/Spring Boot` - Hospedada em `Render`.
+- **Banco de Dados:** `Supabase`.
 - **CI/CD e DevOps:** GitHub Actions para automação de build, testes e deploy automático.
 
 ---

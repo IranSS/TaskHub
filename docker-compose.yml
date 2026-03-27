@@ -1,21 +1,21 @@
 services:
-  # db:
-  #   image: postgres:15-alpine
-  #   ports:
-  #     - "5432:5432"
-  #   # environment:
-  #   #   POSTGRES_DB: gerenciar-tarefas-db
-  #   #   POSTGRES_USER: postgres
-  #   #   POSTGRES_PASSWORD: 8569
-  #   env_file:
-  #     - ./backend-taskhub/.env
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "pg_isready -U postgres -d gerenciar-tarefas-db"]
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 5
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    # environment:
+    #   POSTGRES_DB: gerenciar-tarefas-db
+    #   POSTGRES_USER: postgres
+    #   POSTGRES_PASSWORD: 8569
+    env_file:
+      - ./backend-taskhub/.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d gerenciar-tarefas-db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   backend:
     build:
@@ -24,27 +24,29 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://aws-1-sa-east-1.pooler.supabase.com:5432/postgres
-    # depends_on:
-    #   db:
-    #     condition: service_healthy
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/gerenciar-tarefas-db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=8569
+    depends_on:
+      db:
+        condition: service_healthy
 
-  # frontend:
-  #   build:
-  #     context: ./frontend-taskhub
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5173:5173"
-  #   depends_on:
-  #     - backend
-  #   # Mágica para o Hot Reload (HMR) funcionar no Docker!
-  #   develop:
-  #     watch:
-  #       - action: sync
-  #         path: ./frontend-taskhub
-  #         target: /app
-  #         ignore:
-  #           - node_modules/
+  frontend:
+    build:
+      context: ./frontend-taskhub
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    # Mágica para o Hot Reload (HMR) funcionar no Docker!
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend-taskhub
+          target: /app
+          ignore:
+            - node_modules/
 
 volumes:
   postgres_data:

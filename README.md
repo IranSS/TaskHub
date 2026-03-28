@@ -15,7 +15,7 @@ A equipe é composta por 6 integrantes, distribuídos nos seguintes papéis téc
 
 | Nome do Aluno | Papel Técnico |  
 | :--- | :--- | 
-| **Dante vasconcelos Diniz<br>Francisco Iranildo de Sousa Avelino** | Arquiteto(a) de Software em Nuvem
+| **Dante Vasconcelos Diniz<br>Francisco Iranildo de Sousa Avelino** | Arquiteto(a) de Software em Nuvem
 | **Francisco Iranildo de Sousa Avelino** | Desenvolvedor(a) Back-end
 | **Arimateia Barbosa da Silveira** | Desenvolvedor(a) Front-end
 | **Jorgirerison Leite Peixoto** | Engenheiro(a) DevOps 

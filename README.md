@@ -1,4 +1,4 @@
-<h1 align="center">[TaskHub]</h1>
+<h1 align="center">TaskHub</h1>
 
 > Um gerenciador de tarefas minimalista para quem não quer perder tempo com menus complexos.
 

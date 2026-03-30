@@ -80,6 +80,11 @@ Frontend: http://localhost:5173
 Backend (API): http://localhost:8080
 
 ---
+
+## 📺 Demonstração em Vídeo
+
+[![Demonstração em Vídeo](https://img.youtube.com/vi/M2hXj6KMCI0/maxresdefault.jpg)](https://www.youtube.com/watch?v=M2hXj6KMCI0)
+---
 #### Copyright © 2026 / [TaskHub Team](https://github.com/IranSS/)
 
 A permissão é concedida, gratuitamente, a qualquer pessoa que obtenha uma cópia deste arquivo, sem restrição nos direitos de usar, copiar, modificar e mesclar.

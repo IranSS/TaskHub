@@ -83,7 +83,7 @@ Backend (API): http://localhost:8080
 
 ## 📺 Demonstração em Vídeo
 
-[![Demonstração em Vídeo](https://img.youtube.com/vi/M2hXj6KMCI0/maxresdefault.jpg)](https://www.youtube.com/watch?v=M2hXj6KMCI0)
+[![Demonstração em Vídeo](https://img.youtube.com/vi/uB00KpBtNMI/maxresdefault.jpg)](https://www.youtube.com/watch?v=uB00KpBtNMI)
 ---
 #### Copyright © 2026 / [TaskHub Team](https://github.com/IranSS/)
 

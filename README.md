@@ -78,6 +78,7 @@ Após o processo de build, você poderá acessar:
 Frontend: http://localhost:5173
 
 Backend (API): http://localhost:8080
+
 ---
 #### Copyright © 2026 / [TaskHub Team](https://github.com/IranSS/)
 

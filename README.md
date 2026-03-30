@@ -46,9 +46,7 @@ O projeto foi desenvolvido utilizando uma arquitetura cliente-servidor, separand
 
 Para rodar este projeto localmente, você precisará ter instalado em sua máquina:
 
-- [Git](https://git-scm.com/)
 - [Docker](https://www.docker.com/) e Docker Compose
-- [Node.js / Python / Java] *(Especifique a versão, ex: Node.js v18+)*
 
 ---
 
@@ -56,17 +54,30 @@ Para rodar este projeto localmente, você precisará ter instalado em sua máqui
 
 **1. Clone o repositório:**
 ```bash
-git clone https://github.com/usuario/nome-do-repositorio.git
-cd nome-do-repositorio
+git clone https://github.com/IranSS/TaskHub.git
+cd TaskHub
 ```
+**2. Configurar Variáveis de Ambiente:**
 
+Ambos os serviços precisam de um arquivo .env para funcionar corretamente.
 
+Na pasta /backend-taskhub, duplique o arquivo .env.example e renomeie para .env.
 
+Na pasta /frontend-taskhub, duplique o arquivo .env.example e renomeie para .env.
 
+Nota: Certifique-se de que a variável de URL da API no frontend esteja apontando para http://localhost:8080 (ou a porta definida no seu backend).
 
+**3. Subir os Containers:**
 
+Na raiz do projeto (onde o arquivo docker-compose.yml está localizado), execute:
+```bash
+docker-compose up --build
+```
+Após o processo de build, você poderá acessar:
 
+Frontend: http://localhost:5173
 
+Backend (API): http://localhost:8080
 
 #### Copyright © 2026 / [TaskHub Team](https://github.com/IranSS/)
 
